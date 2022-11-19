@@ -57,16 +57,35 @@ const HomePage = () => {
       ),
     },
   ];
+  
+  // getting all transactions
+  const getAllTransactions = async () => {
+    try {
+      setLoading(true);
+      const res = await axios.post("https://money-manager-backend-depl.cyclic.app/api/v1/transections/get-transection", {
+        frequency,
+        selectedDate,
+        type,
+      });
+      setLoading(false);
+      setAllTransection(res.data);
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);
+      message.error("Ftech Issue With Tranction");
+    }
+  };
 
   //delete handler
   const handleDelete = async (record) => {
     try {
       setLoading(true);
-      await axios.post("/transections/delete-transection", {
+      await axios.post("https://money-manager-backend-depl.cyclic.app/api/v1/transections/delete-transection", {
         transacationId: record._id,
       });
       setLoading(false);
       message.success("Transaction Deleted!");
+      getAllTransactions();
     } catch (error) {
       setLoading(false);
       console.log(error);
@@ -79,7 +98,7 @@ const HomePage = () => {
     try {
       setLoading(true);
       if (editable) {
-        await axios.post("/transections/edit-transection", {
+        await axios.post("https://money-manager-backend-depl.cyclic.app/api/v1/transections/edit-transection", {
           payload: {
             ...values,
           },
@@ -87,12 +106,14 @@ const HomePage = () => {
         });
         setLoading(false);
         message.success("Transaction Updated Successfully");
+        getAllTransactions();
       } else {
-        await axios.post("/transections/add-transection", {
+        await axios.post("https://money-manager-backend-depl.cyclic.app/api/v1/transections/add-transection", {
           ...values,
         });
         setLoading(false);
         message.success("Transaction Added Successfully");
+        getAllTransactions();
       }
       setShowModal(false);
       setEditable(null);
@@ -105,23 +126,9 @@ const HomePage = () => {
   //getall transactions
   //useEffect Hook
   useEffect(() => {
-    const getAllTransactions = async () => {
-      try {
-        setLoading(true);
-        const res = await axios.post("https://money-manager-app-backend-depl.herokuapp.com/api/v1/transections/get-transection", {
-          frequency,
-          selectedDate,
-          type,
-        });
-        setLoading(false);
-        setAllTransection(res.data);
-        console.log(res.data);
-      } catch (error) {
-        console.log(error);
-        message.error("Ftech Issue With Tranction");
-      }
-    };
+   
     getAllTransactions();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [frequency, selectedDate, type]);
   return (
     <Layout>
