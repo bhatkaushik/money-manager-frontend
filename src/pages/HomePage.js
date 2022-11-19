@@ -108,7 +108,7 @@ const HomePage = () => {
     const getAllTransactions = async () => {
       try {
         setLoading(true);
-        const res = await axios.post("/transections/get-transection", {
+        const res = await axios.post("https://money-manager-app-backend-depl.herokuapp.com/transections/get-transection", {
           frequency,
           selectedDate,
           type,
