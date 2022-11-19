@@ -1,0 +1,5 @@
+frontend repo - https://github.com/bhatkaushik/money-manager-frontend/
+backend repo - https://github.com/bhatkaushik/money-manager-backend/
+frontend deployed url - https://money-manager-app-kaushik.netlify.app/
+backend deployed url - https://money-manager-backend-depl.cyclic.app/
+
