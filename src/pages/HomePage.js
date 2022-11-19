@@ -218,12 +218,7 @@ const HomePage = () => {
           <Form.Item label="Date" name="date">
             <Input type="date" />
           </Form.Item>
-          <Form.Item label="Usage" name="usage">
-            <Select>
-              <Select.Option value="office">Office</Select.Option>
-              <Select.Option value="personal">Personal</Select.Option>
-            </Select>
-          </Form.Item>
+          
           <Form.Item label="Description" name="description">
             <Input type="text" />
           </Form.Item>
